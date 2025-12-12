@@ -1,15 +1,11 @@
-name: Build APK
+name: Build APK (Debug)
 
 on:
     workflow_dispatch:
-#   push:
-#     branches:
-#       - main
-#   pull_request:
 
 jobs:
-  build:
-    name: Build Debug APK
+  build-release:
+    name: Build Release APK
     runs-on: ubuntu-latest
 
     steps:
@@ -31,10 +27,10 @@ jobs:
           ${{ runner.os }}-gradle-
 
     - name: Build APK
-      run: ./gradlew assembleDebug
+      run: ./gradlew assembleRelease
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
-        name: debug-apk
-        path: app/build/outputs/apk/debug/app-debug.apk
+        name: release-apk
+        path: app/build/outputs/apk/release/app-release.apk
