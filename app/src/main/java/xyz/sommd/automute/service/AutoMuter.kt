@@ -83,7 +83,8 @@ class AutoMuter @Inject constructor(
      * Unconditionally mute the given [stream] with the user's auto mute settings.
      */
     fun mute(stream: Int = STREAM_DEFAULT) {
-        audioManager.mute(show = settings.autoMuteShowUi)
+        val flags = if (settings.autoMuteShowUi) AudioManager.FLAG_SHOW_UI else 0
+        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 0, flags)
         listeners.forEach { it.onMuted(stream) }
     }
     
