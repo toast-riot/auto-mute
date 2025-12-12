@@ -45,9 +45,22 @@ jobs:
           -keypass password \
           app/build/outputs/apk/release/*.apk random-key
 
+    - name: Install Android SDK Build Tools
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y wget unzip
+        wget https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip -O cmdline-tools.zip
+        unzip cmdline-tools.zip -d $HOME/android-sdk
+        mkdir -p $HOME/android-sdk/cmdline-tools/latest
+        mv $HOME/android-sdk/cmdline-tools/* $HOME/android-sdk/cmdline-tools/latest
+        export ANDROID_HOME=$HOME/android-sdk
+        export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH
+        yes | sdkmanager --licenses
+        sdkmanager "build-tools;33.0.2"
+
     - name: Align APK
       run: |
-        zipalign -v -p 4 app/build/outputs/apk/release/*.apk app/build/outputs/apk/release/aligned-release.apk
+        $ANDROID_HOME/build-tools/33.0.2/zipalign -v -p 4 app/build/outputs/apk/release/*.apk app/build/outputs/apk/release/aligned-release.apk
 
     - name: Verify APK signature
       run: jarsigner -verify app/build/outputs/apk/release/aligned-release.apk
