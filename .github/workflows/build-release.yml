@@ -29,8 +29,11 @@ jobs:
     - name: Build APK
       run: ./gradlew assembleRelease
 
+    - name: Log file structure
+      run: find . -type f
+
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
         name: release-apk
-        path: app/build/outputs/apk/release/app-release.apk
+        path: app/build/outputs/apk/release/*.apk
