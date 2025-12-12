@@ -45,11 +45,15 @@ jobs:
           -keypass password \
           app/build/outputs/apk/release/*.apk random-key
 
+    - name: Align APK
+      run: |
+        zipalign -v -p 4 app/build/outputs/apk/release/*.apk app/build/outputs/apk/release/aligned-release.apk
+
     - name: Verify APK signature
-      run: jarsigner -verify app/build/outputs/apk/release/*.apk
+      run: jarsigner -verify app/build/outputs/apk/release/aligned-release.apk
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
-        name: signed-release-apk
-        path: app/build/outputs/apk/release/*.apk
+        name: signed-aligned-release-apk
+        path: app/build/outputs/apk/release/aligned-release.apk
