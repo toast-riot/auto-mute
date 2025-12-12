@@ -29,11 +29,27 @@ jobs:
     - name: Build APK
       run: ./gradlew assembleRelease
 
-    - name: Log file structure
-      run: find . -type f
+    - name: Generate random keystore
+      run: |
+        keytool -genkeypair -alias random-key \
+          -keyalg RSA -keysize 2048 -validity 365 \
+          -keystore random.keystore \
+          -storepass password \
+          -keypass password \
+          -dname "CN=Anonymous, OU=Dev, O=Anonymous, L=City, S=State, C=US"
+
+    - name: Sign APK
+      run: |
+        jarsigner -verbose -keystore random.keystore \
+          -storepass password \
+          -keypass password \
+          app/build/outputs/apk/release/*.apk random-key
+
+    - name: Verify APK signature
+      run: jarsigner -verify app/build/outputs/apk/release/*.apk
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
-        name: release-apk
+        name: signed-release-apk
         path: app/build/outputs/apk/release/*.apk
