@@ -118,7 +118,7 @@ class AutoMuter @Inject constructor(
         } else {
             log { "Muting on boot" }
             
-            audioManager.mute()
+            mute()
         }
     }
     
