@@ -68,6 +68,10 @@
     <string name="pref_auto_mute_headphones_unplugged_title">When Headphones Disconnect</string>
     <string name="pref_auto_mute_headphones_unplugged_summary_on">Automatically mute when headphones disconnect.</string>
     <string name="pref_auto_mute_headphones_unplugged_summary_off">Do nothing when headphones disconnect.</string>
+
+    <string name="pref_auto_mute_use_set_volume_title">Set Volume to Zero When Muting</string>
+    <string name="pref_auto_mute_use_set_volume_summary_on">After muting, pressing "volume up" increases the volume from zero.</string>
+    <string name="pref_auto_mute_use_set_volume_summary_off">After muting, pressing "volume up" restores the last used volume.</string>
     
     <!-- Auto Unmute -->
     <string name="pref_auto_unmute_title">Auto Unmute</string>

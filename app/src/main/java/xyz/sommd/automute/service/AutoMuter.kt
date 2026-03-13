@@ -83,7 +83,11 @@ class AutoMuter @Inject constructor(
      * Unconditionally mute the given [stream] with the user's auto mute settings.
      */
     fun mute(stream: Int = STREAM_DEFAULT) {
-        audioManager.mute(show = settings.autoMuteShowUi)
+        if (settings.autoMuteUseSetVolume) {
+            audioManager.setVolume(0f, stream, settings.autoMuteShowUi)
+        } else {
+            audioManager.mute(stream, settings.autoMuteShowUi)
+        }
         listeners.forEach { it.onMuted(stream) }
     }
     

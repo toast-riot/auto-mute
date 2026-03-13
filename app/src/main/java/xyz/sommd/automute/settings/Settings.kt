@@ -49,6 +49,7 @@ class Settings @Inject constructor(
         const val AUTO_MUTE_HEADPHONES_DISABLED_KEY = "auto_mute_headphones_disabled"
         const val AUTO_MUTE_HEADPHONES_UNPLUGGED_KEY = "auto_mute_headphones_unplugged"
         const val AUTO_MUTE_SHOW_UI_KEY = "auto_mute_show_ui"
+        const val AUTO_MUTE_USE_SET_VOLUME_KEY = "auto_mute_use_set_volume"
         
         const val AUTO_UNMUTE_DEFAULT_VOLUME_KEY = "auto_unmute_default_volume"
         const val AUTO_UNMUTE_MAXIMUM_VOLUME_KEY = "auto_unmute_maximum_volume"
@@ -112,6 +113,10 @@ class Settings @Inject constructor(
     var autoMuteShowUi: Boolean
         get() = sharedPrefs.getBoolean(AUTO_MUTE_SHOW_UI_KEY, false)
         set(value) = sharedPrefs.edit { putBoolean(AUTO_MUTE_SHOW_UI_KEY, value) }
+    
+    var autoMuteUseSetVolume: Boolean
+        get() = sharedPrefs.getBoolean(AUTO_MUTE_USE_SET_VOLUME_KEY, false)
+        set(value) = sharedPrefs.edit { putBoolean(AUTO_MUTE_USE_SET_VOLUME_KEY, value) }
     
     // Auto Unmute
     

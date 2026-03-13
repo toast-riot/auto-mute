@@ -74,6 +74,13 @@
             android:summaryOff="@string/pref_auto_mute_show_ui_summary_off"
             android:summaryOn="@string/pref_auto_mute_show_ui_summary_on"
             android:title="@string/pref_auto_mute_show_ui_title" />
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="auto_mute_use_set_volume"
+            android:summaryOff="@string/pref_auto_mute_use_set_volume_summary_off"
+            android:summaryOn="@string/pref_auto_mute_use_set_volume_summary_on"
+            android:title="@string/pref_auto_mute_use_set_volume_title" />
     </PreferenceCategory>
     
     <PreferenceCategory android:title="@string/pref_auto_unmute_title">
